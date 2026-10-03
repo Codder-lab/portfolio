@@ -56,28 +56,37 @@ export const TerminalPanel: React.FC<TerminalPanelProps> = ({
     }
   }, [isOpen, activeTab]);
 
-  // Resizing mouse drag handlers
+  // Resizing mouse and touch drag handlers
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMove = (clientY: number) => {
       if (!isDragging) return;
-      const newHeight = window.innerHeight - e.clientY - 24; // 24px statusbar offset
-      if (newHeight >= 100 && newHeight <= window.innerHeight - 150) {
+      const newHeight = window.innerHeight - clientY - 24; // 24px statusbar offset
+      const minHeight = 100;
+      const maxHeight = Math.max(120, window.innerHeight - 100);
+      if (newHeight >= minHeight && newHeight <= maxHeight) {
         setPanelHeight(newHeight);
       }
     };
 
-    const handleMouseUp = () => {
-      setIsDragging(false);
+    const handleMouseMove = (e: MouseEvent) => handleMove(e.clientY);
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) handleMove(e.touches[0].clientY);
     };
+
+    const handleEnd = () => setIsDragging(false);
 
     if (isDragging) {
       window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("mouseup", handleEnd);
+      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchend", handleEnd);
     }
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseup", handleEnd);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleEnd);
     };
   }, [isDragging]);
 
@@ -472,13 +481,14 @@ export const TerminalPanel: React.FC<TerminalPanelProps> = ({
 
   return (
     <div
-      style={{ height: `${panelHeight}px` }}
+      style={{ height: `${panelHeight}px`, maxHeight: "65vh" }}
       className="w-full bg-[#1e1e1e] border-t border-[#333338] flex flex-col shrink-0 relative select-text z-30 transition-all font-mono"
     >
       {/* Resizable Top Edge Handle */}
       <div
         onMouseDown={() => setIsDragging(true)}
-        className="absolute -top-1 left-0 right-0 h-2 cursor-row-resize hover:bg-[#007acc]/40 transition-colors z-40"
+        onTouchStart={() => setIsDragging(true)}
+        className="absolute -top-1.5 left-0 right-0 h-3 cursor-row-resize hover:bg-[#007acc]/40 transition-colors z-40 touch-none"
         title="Drag to resize terminal panel"
       />
 
@@ -568,9 +578,10 @@ export const TerminalPanel: React.FC<TerminalPanelProps> = ({
               }
               if (item.type === "command") {
                 return (
-                  <div key={idx} className="flex items-center space-x-2">
-                    <span className="text-[#4ec9b0] font-semibold">{userPrompt}</span>
-                    <span className="text-[#cccccc]">@portfolio:~$</span>
+                  <div key={idx} className="flex items-center space-x-1.5 sm:space-x-2">
+                    <span className="text-[#4ec9b0] font-semibold hidden sm:inline">{userPrompt}</span>
+                    <span className="text-[#cccccc] hidden sm:inline">@portfolio:~$</span>
+                    <span className="text-[#4ec9b0] font-bold sm:hidden">❯</span>
                     <span className="text-white font-medium">{item.content}</span>
                   </div>
                 );
@@ -597,9 +608,10 @@ export const TerminalPanel: React.FC<TerminalPanelProps> = ({
             })}
 
             {/* Active Command Input Line */}
-            <div className="flex items-center space-x-2 pt-0.5">
-              <span className="text-[#4ec9b0] font-semibold">{userPrompt}</span>
-              <span className="text-[#cccccc]">@portfolio:~$</span>
+            <div className="flex items-center space-x-1.5 sm:space-x-2 pt-0.5">
+              <span className="text-[#4ec9b0] font-semibold hidden sm:inline">{userPrompt}</span>
+              <span className="text-[#cccccc] hidden sm:inline">@portfolio:~$</span>
+              <span className="text-[#4ec9b0] font-bold sm:hidden">❯</span>
               <div className="flex-1 flex items-center relative">
                 <input
                   ref={inputRef}

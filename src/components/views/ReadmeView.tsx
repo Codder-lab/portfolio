@@ -13,16 +13,16 @@ export const ReadmeView: React.FC = () => {
   ];
 
   return (
-    <div className="w-full bg-[#1e1e1e] text-[#cccccc] px-6 sm:px-12 py-10 max-w-4xl font-mono text-xs sm:text-sm">
+    <div className="w-full bg-[#1e1e1e] text-[#cccccc] px-4 sm:px-8 md:px-12 py-6 sm:py-10 max-w-4xl font-mono text-xs sm:text-sm">
       <div className="text-xs sm:text-[13px] text-[#9d9da5] mb-3 opacity-0 animate-su-1">
         Software Developer {personal.companyBadge} · {personal.location}
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-8 opacity-0 animate-su-2">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8 opacity-0 animate-su-2">
         {topBadges.map((badge, idx) => (
           <span
             key={idx}
-            className="inline-flex items-center gap-1.5 px-3 py-1 text-xs border rounded-sm bg-white/3 font-mono"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs border rounded-sm bg-white/3 font-mono"
             style={{ borderColor: badge.borderColor }}
           >
             <span
@@ -34,8 +34,8 @@ export const ReadmeView: React.FC = () => {
         ))}
       </div>
 
-      <div className="space-y-4 mb-8 opacity-0 animate-su-3">
-        <h2 className="font-display font-extrabold text-[24px] sm:text-[28px] text-white tracking-tight flex items-center gap-2">
+      <div className="space-y-3 sm:space-y-4 mb-7 sm:mb-8 opacity-0 animate-su-3">
+        <h2 className="font-display font-extrabold text-[20px] sm:text-[28px] text-white tracking-tight flex items-center gap-2">
           <span>About Me</span>
         </h2>
 
@@ -53,18 +53,18 @@ export const ReadmeView: React.FC = () => {
         </div>
       </div>
 
-      <div className="space-y-4 mb-10 opacity-0 animate-su-4">
-        <h2 className="font-display font-extrabold text-[24px] sm:text-[28px] text-white tracking-tight">
-          Stack
+      <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-10 opacity-0 animate-su-4">
+        <h2 className="font-display font-extrabold text-[20px] sm:text-[28px] text-white tracking-tight">
+          Tech Stack
         </h2>
 
         <div className="space-y-3 max-w-3xl">
           {skills.map((categoryGroup) => (
             <div
               key={categoryGroup.category}
-              className="flex flex-col sm:flex-row sm:items-center gap-2 text-xs"
+              className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs"
             >
-              <span className="text-[#888888] font-bold w-44 shrink-0">
+              <span className="text-[#888888] font-bold w-auto sm:w-44 shrink-0">
                 {categoryGroup.category}:
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -84,7 +84,7 @@ export const ReadmeView: React.FC = () => {
 
       <div className="space-y-3 mb-10 opacity-0 animate-su-5">
         <h2 className="font-display font-extrabold text-[24px] sm:text-[28px] text-white tracking-tight">
-          Connect
+          Connect Me
         </h2>
 
         <div className="space-y-1.5 text-xs text-[#9d9da5] max-w-xl">

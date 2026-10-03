@@ -5,20 +5,20 @@ export const AboutView: React.FC = () => {
   const { personal } = portfolioData;
 
   return (
-    <div className="w-full bg-[#1e1e1e] text-[#cccccc] px-6 sm:px-12 py-10 max-w-4xl">
+    <div className="w-full bg-[#1e1e1e] text-[#cccccc] px-4 sm:px-8 md:px-12 py-6 sm:py-10 max-w-4xl">
       <p className="text-xs sm:text-sm text-[#6a9955] font-mono opacity-0 animate-su-1 mb-2">
         &lt;!-- about.html - {personal.firstName} {personal.lastName} --&gt;
       </p>
 
-      <h1 className="font-display font-extrabold text-[38px] sm:text-[50px] leading-tight text-white tracking-[-1.5px] opacity-0 animate-su-2">
+      <h1 className="font-display font-extrabold text-[30px] sm:text-[42px] md:text-[50px] leading-tight text-white tracking-[-1px] sm:tracking-[-1.5px] opacity-0 animate-su-2">
         About Me
       </h1>
 
-      <p className="text-xs sm:text-[13px] text-[#777777] font-mono mb-7 opacity-0 animate-su-2">
+      <p className="text-xs sm:text-[13px] text-[#777777] font-mono mb-6 sm:mb-7 opacity-0 animate-su-2">
         // who I am · what I do · where I build
       </p>
 
-      <div className="border border-[#333338] bg-white/2 rounded-lg p-5 sm:p-7 space-y-4 mb-7 opacity-0 animate-su-3 font-mono text-xs sm:text-sm leading-relaxed text-[#bbbbbb]">
+      <div className="border border-[#333338] bg-white/2 rounded-lg p-4 sm:p-7 space-y-3.5 sm:space-y-4 mb-7 opacity-0 animate-su-3 font-mono text-xs sm:text-sm leading-relaxed text-[#bbbbbb]">
         <p>
           Hi! I'm{" "}
           <strong className="text-[#4fc1ff] font-semibold">

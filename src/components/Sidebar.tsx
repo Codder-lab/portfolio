@@ -5,6 +5,7 @@ import {
   RefreshCw,
   Search as SearchIcon,
   CheckCircle2,
+  X,
 } from "lucide-react";
 import {
   ReactIcon,
@@ -30,6 +31,7 @@ interface SidebarProps {
   onSelectFile: (fileId: string) => void;
   activeView: "explorer" | "search" | "git";
   onSearchQuery?: (q: string) => void;
+  onClose?: () => void;
 }
 
 export const fileList: FileItem[] = [
@@ -52,6 +54,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   activeFileId,
   onSelectFile,
   activeView,
+  onClose,
 }) => {
   const [isFolderOpen, setIsFolderOpen] = useState(true);
   const [searchFilter, setSearchFilter] = useState("");
@@ -74,7 +77,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="w-56 md:w-60 bg-[#252526] text-[#cccccc] flex flex-col justify-between border-r border-[#1e1e1e] select-none text-xs shrink-0 font-sans">
+    <div className="fixed md:relative top-9 md:top-auto bottom-6 md:bottom-auto left-11 sm:left-12 md:left-auto z-40 md:z-auto w-64 md:w-60 max-w-[calc(100vw-48px)] bg-[#252526] text-[#cccccc] flex flex-col justify-between border-r border-[#1e1e1e] select-none text-xs shrink-0 font-sans shadow-2xl md:shadow-none">
       <div className="flex flex-col flex-1 overflow-y-auto">
         <div className="px-4 py-2.5 flex items-center justify-between text-[11px] font-bold tracking-wider text-[#969696] uppercase border-b border-[#2d2d30] shrink-0">
           <span className="truncate">{getViewTitle()}</span>
@@ -87,6 +90,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
             >
               <RefreshCw className="w-3.5 h-3.5" />
             </button>
+            {onClose && (
+              <button
+                type="button"
+                className="md:hidden hover:text-white cursor-pointer transition-colors p-0.5 rounded"
+                title="Close sidebar"
+                onClick={onClose}
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
         </div>
 

@@ -33,11 +33,35 @@ export function App() {
   ]);
   const [activeFileId, setActiveFileId] = useState<string>("home.tsx");
 
-  // Activity & Sidebar state
+  // Mobile breakpoint state
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
+
+  // Activity & Sidebar state (closed by default on mobile, open on desktop)
   const [activeView, setActiveView] = useState<"explorer" | "search" | "git">(
     "explorer",
   );
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth >= 768;
+    }
+    return true;
+  });
+
+  // Track window resize for responsive adaptations
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Modals state
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
@@ -90,6 +114,11 @@ export function App() {
       setOpenTabs((prev) => [...prev, fileId]);
     }
     setActiveFileId(fileId);
+
+    // Close sidebar drawer automatically on mobile when a file is tapped
+    if (window.innerWidth < 768) {
+      setIsSidebarOpen(false);
+    }
   };
 
   // Handle closing a tab
@@ -132,11 +161,13 @@ export function App() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-[#1e1e1e] text-[#cccccc] overflow-hidden select-none font-sans">
+    <div className="h-screen h-dvh w-screen flex flex-col bg-[#1e1e1e] text-[#cccccc] overflow-hidden select-none font-sans">
       <TitleBar
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         onNavigateFile={handleSelectFile}
         onToggleTerminal={() => setIsTerminalOpen((prev) => !prev)}
+        onToggleSidebar={() => setIsSidebarOpen((prev) => !prev)}
+        isSidebarOpen={isSidebarOpen}
       />
 
       <div className="flex-1 min-h-0 flex overflow-hidden relative">
@@ -149,11 +180,20 @@ export function App() {
           onDownloadResume={downloadResume}
         />
 
+        {/* Mobile backdrop overlay for sidebar drawer */}
+        {isSidebarOpen && isMobile && (
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35 md:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+
         {isSidebarOpen && (
           <Sidebar
             activeFileId={activeFileId}
             onSelectFile={handleSelectFile}
             activeView={activeView}
+            onClose={() => setIsSidebarOpen(false)}
           />
         )}
 

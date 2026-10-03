@@ -3,21 +3,21 @@ import { portfolioData, type Project } from "../../data/portfolioData";
 
 export const ProjectsView: React.FC = () => {
   return (
-    <div className="w-full bg-[#1e1e1e] text-[#cccccc] px-6 sm:px-12 py-10 max-w-5xl">
+    <div className="w-full bg-[#1e1e1e] text-[#cccccc] px-4 sm:px-8 md:px-12 py-6 sm:py-10 max-w-5xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {portfolioData.projects.map((project: Project, idx: number) => {
           return (
             <div
               key={project.id}
-              className="border border-[#333338] hover:border-[#007acc]/60 rounded-lg p-5 sm:p-6 bg-white/2 flex flex-col justify-between group transition-all duration-200 opacity-0"
+              className="border border-[#333338] hover:border-[#007acc]/60 rounded-lg p-4 sm:p-6 bg-white/2 flex flex-col justify-between group transition-all duration-200 opacity-0"
               style={{
                 animation: `slideUp 0.5s ease ${0.1 + Math.min(idx, 8) * 0.08}s forwards`,
               }}
             >
               <div>
                 {/* Top header row: Category & Links */}
-                <div className="flex items-center justify-between gap-2 mb-2.5">
-                  <div className="flex items-center gap-1.5 truncate">
+                <div className="flex items-center justify-between gap-2 mb-2.5 flex-wrap sm:flex-nowrap">
+                  <div className="flex items-center gap-1.5 truncate min-w-0">
                     {project.emoji && (
                       <span className="text-sm shrink-0">{project.emoji}</span>
                     )}
@@ -56,12 +56,12 @@ export const ProjectsView: React.FC = () => {
                 </div>
 
                 {/* Card Title */}
-                <h3 className="font-display font-extrabold text-[20px] sm:text-[22px] text-white tracking-[-0.5px] mb-2.5 group-hover:text-[#4fc1ff] transition-colors leading-snug">
+                <h3 className="font-display font-extrabold text-[18px] sm:text-[22px] text-white tracking-[-0.5px] mb-2 sm:mb-2.5 group-hover:text-[#4fc1ff] transition-colors leading-snug">
                   {project.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs sm:text-[13px] text-[#9d9da5] leading-relaxed mb-5 font-mono">
+                <p className="text-xs sm:text-[13px] text-[#9d9da5] leading-relaxed mb-4 sm:mb-5 font-mono">
                   {project.description}
                 </p>
               </div>

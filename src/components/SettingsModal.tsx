@@ -64,13 +64,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   return (
     <div
-      ref={menuRef}
-      className="fixed left-12 bottom-6 w-68.75 max-h-[calc(100vh-65px)] bg-[#1e1e24] border border-[#34343d] rounded-t-lg rounded-br-lg shadow-2xl z-50 select-none font-sans text-xs flex flex-col text-[#cccccc] overflow-hidden"
-      style={{
-        boxShadow:
-          "0 20px 40px -10px rgba(0,0,0,0.8), 0 0 1px rgba(255,255,255,0.15)",
-      }}
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs md:bg-transparent md:backdrop-blur-none flex md:block items-end sm:items-center justify-center p-3 sm:p-0"
+      onClick={onClose}
     >
+      <div
+        ref={menuRef}
+        onClick={(e) => e.stopPropagation()}
+        className="relative md:fixed md:left-12 md:bottom-6 w-full max-w-sm sm:max-w-none sm:w-72 max-h-[calc(100dvh-60px)] bg-[#1e1e24] border border-[#34343d] rounded-lg shadow-2xl z-50 select-none font-sans text-xs flex flex-col text-[#cccccc] overflow-hidden"
+        style={{
+          boxShadow:
+            "0 20px 40px -10px rgba(0,0,0,0.8), 0 0 1px rgba(255,255,255,0.15)",
+        }}
+      >
       <div className="px-3.5 py-2.5 bg-[#23232b] border-b border-[#2d2d36] flex items-center justify-between shrink-0">
         <span className="text-[10.5px] font-bold tracking-widest text-[#9393a0] uppercase font-mono">
           SETTINGS
@@ -267,5 +272,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 };

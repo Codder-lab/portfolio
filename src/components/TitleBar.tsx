@@ -1,11 +1,13 @@
 import React from "react";
-import { Search } from "lucide-react";
+import { Search, PanelLeft, Terminal } from "lucide-react";
 import { portfolioData } from "../data/portfolioData";
 
 interface TitleBarProps {
   onOpenCommandPalette: () => void;
   onNavigateFile: (fileId: string) => void;
   onToggleTerminal?: () => void;
+  onToggleSidebar?: () => void;
+  isSidebarOpen?: boolean;
 }
 
 interface MenuItemAction {
@@ -23,6 +25,7 @@ export const TitleBar: React.FC<TitleBarProps> = ({
   onOpenCommandPalette,
   onNavigateFile,
   onToggleTerminal,
+  onToggleSidebar,
 }) => {
   const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
 
@@ -145,15 +148,26 @@ export const TitleBar: React.FC<TitleBarProps> = ({
 
   return (
     <div
-      className="h-9 bg-[#1f1f24] text-[#cccccc] border-b border-[#2b2b30] flex items-center justify-between px-3 text-xs select-none relative z-50 shrink-0"
+      className="h-9 bg-[#1f1f24] text-[#cccccc] border-b border-[#2b2b30] flex items-center justify-between px-2.5 sm:px-3 text-xs select-none relative z-50 shrink-0"
       onClick={() => setActiveMenu(null)}
     >
-      <div className="flex items-center space-x-3">
-        <div className="flex items-center space-x-2 mr-2">
-          <div className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] cursor-pointer hover:opacity-80" />
-          <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] cursor-pointer hover:opacity-80" />
-          <div className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] cursor-pointer hover:opacity-80" />
+      <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+        <div className="flex items-center space-x-1.5 sm:space-x-2 mr-1">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] cursor-pointer hover:opacity-80" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] cursor-pointer hover:opacity-80" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#27c93f] border border-[#1aab29] cursor-pointer hover:opacity-80" />
         </div>
+
+        {onToggleSidebar && (
+          <button
+            type="button"
+            onClick={onToggleSidebar}
+            className="md:hidden p-1 text-[#999999] hover:text-white hover:bg-[#333338] rounded cursor-pointer transition-colors"
+            title="Toggle Explorer"
+          >
+            <PanelLeft className="w-3.5 h-3.5" />
+          </button>
+        )}
 
         <div className="hidden md:flex items-center space-x-1 text-[#b5b5b5]">
           {menuItems.map((menu) => (
@@ -201,27 +215,37 @@ export const TitleBar: React.FC<TitleBarProps> = ({
         </div>
       </div>
 
-      <div className="flex-1 max-w-md mx-4">
+      <div className="flex-1 max-w-xs sm:max-w-md mx-2 sm:mx-4 min-w-0">
         <button
           type="button"
           onClick={onOpenCommandPalette}
-          className="w-full h-6 bg-[#2b2b32] hover:bg-[#32323a] border border-[#3c3c44] rounded px-3 flex items-center justify-between text-[#999999] hover:text-white transition-all text-xs cursor-pointer shadow-sm group"
+          className="w-full h-6 bg-[#2b2b32] hover:bg-[#32323a] border border-[#3c3c44] rounded px-2 sm:px-3 flex items-center justify-between text-[#999999] hover:text-white transition-all text-xs cursor-pointer shadow-sm group"
         >
-          <div className="flex items-center space-x-2 truncate">
-            <Search className="w-3 h-3 text-[#797985] group-hover:text-[#38bdf8] transition-colors" />
-            <span className="truncate">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 truncate">
+            <Search className="w-3 h-3 text-[#797985] group-hover:text-[#38bdf8] transition-colors shrink-0" />
+            <span className="truncate text-[11px] sm:text-xs">
               {portfolioData.personal.username} :{" "}
               {portfolioData.personal.repoName}
             </span>
           </div>
-          <div className="flex items-center space-x-1 bg-[#1e1e24] px-1.5 py-0.5 rounded border border-[#3a3a44] text-[10px] text-[#8e8ea0] font-mono">
+          <div className="hidden sm:flex items-center space-x-1 bg-[#1e1e24] px-1.5 py-0.5 rounded border border-[#3a3a44] text-[10px] text-[#8e8ea0] font-mono shrink-0">
             <span>Ctrl</span>
             <span>P</span>
           </div>
         </button>
       </div>
 
-      <div className="flex items-center space-x-2 text-[#999999]">
+      <div className="flex items-center space-x-1 sm:space-x-2 text-[#999999] shrink-0">
+        {onToggleTerminal && (
+          <button
+            type="button"
+            onClick={onToggleTerminal}
+            className="md:hidden p-1 text-[#999999] hover:text-white hover:bg-[#333338] rounded cursor-pointer transition-colors"
+            title="Toggle Integrated Terminal"
+          >
+            <Terminal className="w-3.5 h-3.5" />
+          </button>
+        )}
       </div>
     </div>
   );

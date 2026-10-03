@@ -52,19 +52,19 @@ export const StatusBar: React.FC<StatusBarProps> = ({
 
   return (
     <div
-      className="h-6 flex items-center justify-between px-3 text-[11px] select-none shrink-0 font-mono z-40 transition-colors duration-200"
+      className="h-6 flex items-center justify-between px-2 sm:px-3 text-[10px] sm:text-[11px] select-none shrink-0 font-mono z-40 transition-colors duration-200 overflow-x-auto scrollbar-none whitespace-nowrap"
       style={{
         backgroundColor: "var(--statusbar)",
         color: "var(--statusbar-text)",
       }}
     >
-      <div className="flex items-center space-x-3">
-        <div className="flex items-center space-x-1.5 hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors">
+      <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+        <div className="flex items-center space-x-1 sm:space-x-1.5 hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors">
           <GitBranch className="w-3 h-3" />
-          <span className="font-semibold">main</span>
+          <span className="font-semibold text-[10px] sm:text-[11px]">main</span>
         </div>
 
-        <div className="hidden sm:flex items-center space-x-1 hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer text-[10px] transition-colors">
+        <div className="hidden md:flex items-center space-x-1 hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer text-[10px] transition-colors">
           <RefreshCw className="w-2.5 h-2.5" />
           <span>↑1 +3</span>
         </div>
@@ -73,7 +73,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
           type="button"
           onClick={onToggleTerminal}
           title="Toggle Terminal Panel"
-          className="flex items-center space-x-1.5 hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors"
+          className="flex items-center space-x-1 sm:space-x-1.5 hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors text-[10px] sm:text-[11px]"
         >
           <div className="flex items-center space-x-0.5">
             <AlertCircle className="w-2.5 h-2.5" />
@@ -85,18 +85,18 @@ export const StatusBar: React.FC<StatusBarProps> = ({
           </div>
         </button>
 
-        <div className="hidden md:flex items-center space-x-1 font-medium hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors">
+        <div className="hidden lg:flex items-center space-x-1 font-medium hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors">
           <span className="text-[10px]">⚡</span>
           <span>{portfolioData.personal.firstName}'s Portfolio</span>
         </div>
       </div>
 
-      <div className="flex items-center space-x-3">
-        <div className="hidden sm:block hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors">
+      <div className="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
+        <div className="hidden sm:block hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors text-[10px] sm:text-[11px]">
           {getLanguageMode(activeFileId)}
         </div>
 
-        <div className="hidden md:block hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors">
+        <div className="hidden md:block hover:bg-black/15 px-1.5 py-0.5 rounded cursor-pointer transition-colors text-[10px] sm:text-[11px]">
           UTF-8
         </div>
 
@@ -109,14 +109,14 @@ export const StatusBar: React.FC<StatusBarProps> = ({
           type="button"
           onClick={onToggleTheme}
           title="Change theme"
-          className="flex items-center space-x-1.5 hover:bg-black/20 px-2 py-0.5 rounded cursor-pointer transition-colors"
+          className="flex items-center space-x-1 sm:space-x-1.5 hover:bg-black/20 px-1.5 sm:px-2 py-0.5 rounded cursor-pointer transition-colors text-[10px] sm:text-[11px]"
         >
           <span className="text-xs">{activeTheme.icon}</span>
-          <span className="font-semibold">{activeTheme.name}</span>
+          <span className="font-semibold hidden xs:inline sm:inline truncate max-w-24 sm:max-w-none">{activeTheme.name}</span>
           <span className="text-[9px] opacity-80">$</span>
         </button>
 
-        <div className="font-semibold px-1 opacity-90">{time || "11:58"}</div>
+        <div className="font-semibold px-1 opacity-90 text-[10px] sm:text-[11px]">{time || "11:58"}</div>
       </div>
     </div>
   );

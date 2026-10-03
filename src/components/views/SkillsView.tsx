@@ -10,15 +10,15 @@ export const SkillsView: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#1e1e1e] text-[#d4d4d4] px-6 sm:px-12 py-8">
+    <div className="w-full bg-[#1e1e1e] text-[#d4d4d4] px-4 sm:px-8 md:px-12 py-6 sm:py-8">
       <div className="max-w-4xl mx-auto space-y-4 pb-12 font-mono text-xs sm:text-sm">
         <div className="text-[#6a9955] text-xs opacity-0 animate-su-1">
           // skills.json - Interactive technical capabilities and toolchains
         </div>
 
-        <div className="bg-[#252526]/40 p-4 sm:p-6 rounded-lg border border-[#333338] space-y-2 select-text opacity-0 animate-su-2">
+        <div className="bg-[#252526]/40 p-3 sm:p-6 rounded-lg border border-[#333338] space-y-2 select-text opacity-0 animate-su-2">
           <div className="text-yellow-400 font-bold">&#123;</div>
-          <div className="pl-4 sm:pl-6 space-y-4">
+          <div className="pl-2 sm:pl-6 space-y-4">
             <div className="text-xs text-[#858585] opacity-0 animate-su-3">
               <span className="text-[#9cdcfe]">"profile"</span>:{" "}
               <span className="text-[#ce9178]">
@@ -30,14 +30,14 @@ export const SkillsView: React.FC = () => {
 
             <div className="space-y-3 opacity-0 animate-su-4">
               <span className="text-[#9cdcfe]">"technical_stack"</span>: &#91;
-              <div className="pl-4 sm:pl-6 space-y-4 mt-2">
+              <div className="pl-2 sm:pl-6 space-y-4 mt-2">
                 {portfolioData.skills.map((group: SkillCategory, idx) => {
                   const isClosed = !!collapsed[group.category];
 
                   return (
                     <div
                       key={group.category}
-                      className="bg-[#1e1e24] p-3 rounded border border-[#2f2f35] opacity-0"
+                      className="bg-[#1e1e24] p-2.5 sm:p-3 rounded border border-[#2f2f35] opacity-0"
                       style={{
                         animation: `slideUp 0.5s ease ${0.35 + idx * 0.08}s forwards`,
                       }}
@@ -46,24 +46,24 @@ export const SkillsView: React.FC = () => {
                         className="flex items-center justify-between cursor-pointer group"
                         onClick={() => toggleCategory(group.category)}
                       >
-                        <div className="flex items-center space-x-1.5">
+                        <div className="flex items-center space-x-1.5 truncate">
                           {isClosed ? (
-                            <ChevronRight className="w-3.5 h-3.5 text-[#858585]" />
+                            <ChevronRight className="w-3.5 h-3.5 text-[#858585] shrink-0" />
                           ) : (
-                            <ChevronDown className="w-3.5 h-3.5 text-[#858585]" />
+                            <ChevronDown className="w-3.5 h-3.5 text-[#858585] shrink-0" />
                           )}
-                          <span className="text-[#4ec9b0] font-bold">
+                          <span className="text-[#4ec9b0] font-bold truncate">
                             "{group.category}"
                           </span>
-                          : &#91;
+                          <span className="shrink-0">: &#91;</span>
                         </div>
-                        <span className="text-[10px] text-[#858585]">
+                        <span className="text-[10px] text-[#858585] shrink-0 ml-2">
                           {group.items.length} items
                         </span>
                       </div>
 
                       {!isClosed && (
-                        <div className="pl-6 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+                        <div className="pl-2 sm:pl-6 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
                           {group.items.map((item) => (
                             <div
                               key={item.name}

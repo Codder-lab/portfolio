@@ -68,12 +68,12 @@ export const ContactView: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#1e1e1e] text-[#cccccc] px-6 sm:px-12 py-10 max-w-5xl">
-      <p className="text-xs sm:text-[13px] text-[#777777] font-mono mb-8 opacity-0 animate-su-1">
+    <div className="w-full bg-[#1e1e1e] text-[#cccccc] px-4 sm:px-8 md:px-12 py-6 sm:py-10 max-w-5xl">
+      <p className="text-xs sm:text-[13px] text-[#777777] font-mono mb-6 sm:mb-8 opacity-0 animate-su-1">
         // open to work, collabs & good conversations
       </p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
         <div className="space-y-3 opacity-0 animate-su-2">
           <h2 className="text-xs sm:text-[13px] font-mono font-bold tracking-[0.2em] text-[#4ec9b0] mb-4 uppercase">
             FIND ME ON

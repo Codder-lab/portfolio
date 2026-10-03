@@ -52,7 +52,7 @@ export const ActivityBar: React.FC<ActivityBarProps> = ({
   };
 
   return (
-    <div className="w-12 bg-[#181818] border-r border-[#26262a] flex flex-col justify-between items-center py-2 select-none z-30 shrink-0">
+    <div className="w-11 sm:w-12 bg-[#181818] border-r border-[#26262a] flex flex-col justify-between items-center py-2 select-none z-30 shrink-0">
       <div className="flex flex-col items-center space-y-3 w-full">
         {topButtons.map((btn) => {
           const Icon = btn.icon;

@@ -101,7 +101,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-start justify-center pt-20 z-50 px-4"
+      className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-start justify-center pt-8 sm:pt-20 z-50 px-3 sm:px-4"
       onClick={onClose}
     >
       <div
@@ -109,8 +109,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         onClick={(e) => e.stopPropagation()}
         onKeyDown={handleKeyDown}
       >
-        <div className="p-3 border-b border-[#333333] flex items-center space-x-2 bg-[#1f1f24]">
-          <Search className="w-4 h-4 text-[#858585]" />
+        <div className="p-2.5 sm:p-3 border-b border-[#333333] flex items-center space-x-2 bg-[#1f1f24]">
+          <Search className="w-4 h-4 text-[#858585] shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -120,18 +120,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               setQuery(e.target.value);
               setSelectedIndex(0);
             }}
-            className="w-full bg-transparent text-white placeholder-[#858585] focus:outline-none text-sm"
+            className="w-full bg-transparent text-white placeholder-[#858585] focus:outline-none text-xs sm:text-sm"
           />
           <button
             type="button"
             onClick={onClose}
-            className="text-[#858585] hover:text-white cursor-pointer"
+            className="text-[#858585] hover:text-white cursor-pointer p-1"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="max-h-72 overflow-y-auto p-1.5 space-y-0.5">
+        <div className="max-h-60 sm:max-h-72 overflow-y-auto p-1.5 space-y-0.5">
           {filtered.length === 0 ? (
             <div className="p-4 text-center text-[#858585]">
               No matching files or commands found.
@@ -150,18 +150,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   }
                   onClose();
                 }}
-                className={`flex items-center justify-between px-3 py-2 rounded cursor-pointer transition-colors ${
+                className={`flex items-center justify-between px-2.5 sm:px-3 py-2 rounded cursor-pointer transition-colors ${
                   idx === selectedIndex
                     ? "bg-[#094771] text-white font-medium"
                     : "hover:bg-[#2a2d2e] text-[#cccccc]"
                 }`}
               >
-                <div className="flex items-center space-x-2.5">
+                <div className="flex items-center space-x-2 sm:space-x-2.5 truncate">
                   <span className="shrink-0">{item.icon}</span>
-                  <span className="text-xs">{item.title}</span>
+                  <span className="text-xs truncate">{item.title}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-[10px] text-[#858585] uppercase tracking-wider font-mono">
+                <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0 ml-2">
+                  <span className="text-[9px] sm:text-[10px] text-[#858585] uppercase tracking-wider font-mono">
                     {item.category}
                   </span>
                   <ArrowRight className="w-3.5 h-3.5 opacity-60" />
@@ -171,8 +171,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        <div className="px-3 py-1.5 bg-[#1e1e1e] border-t border-[#333333] flex items-center justify-between text-[11px] text-[#858585] font-mono">
-          <span>Navigate with ↑ ↓ • Select with Enter</span>
+        <div className="px-3 py-1.5 bg-[#1e1e1e] border-t border-[#333333] flex items-center justify-between text-[10px] sm:text-[11px] text-[#858585] font-mono">
+          <span className="hidden sm:inline">Navigate with ↑ ↓ • Select with Enter</span>
+          <span className="sm:hidden">Tap to select</span>
           <span>ESC to dismiss</span>
         </div>
       </div>
